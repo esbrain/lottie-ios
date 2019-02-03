@@ -8,8 +8,12 @@
 
 #import "UIKit/UIKit.h"
 
-@interface CALayer (LOTAnimationLayer)
-+ (nonnull instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON;
-+ (nonnull instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON loop:(BOOL)loop;
+@protocol LOTAnimationLayer <NSObject>
+- (CGSize)compSize;
 - (void)displayWithProgress:(CGFloat)progress;
+@end
+
+@interface CALayer (LOTAnimationLayer)
++ (nonnull CALayer<LOTAnimationLayer> *)animationFromJSON:(nonnull NSDictionary *)animationJSON;
++ (nonnull CALayer<LOTAnimationLayer> *)animationFromJSON:(nonnull NSDictionary *)animationJSON loop:(BOOL)loop;
 @end

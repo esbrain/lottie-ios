@@ -15,7 +15,7 @@
 #import <objc/runtime.h>
 
 static NSString *sceneModelKey = @"sceneModelKey";
-@interface LOTCompositionContainer (LOTAnimationLayer)
+@interface LOTCompositionContainer (LOTAnimationLayer) <LOTAnimationLayer>
 @property (nonatomic, strong, nullable) LOTComposition *sceneModel;
 @end
 @implementation LOTCompositionContainer (LOTAnimationLayer)
@@ -24,6 +24,9 @@ static NSString *sceneModelKey = @"sceneModelKey";
 }
 - (LOTComposition *)sceneModel {
     return objc_getAssociatedObject(self, &sceneModelKey);
+}
+- (CGSize)compSize {
+    return self.sceneModel.compBounds.size;
 }
 - (instancetype)initWithModel:(LOTComposition *)model inBundle:(NSBundle *)bundle loop:(BOOL)loop {
     self = [self initWithModel:nil inLayerGroup:nil withLayerGroup:model.layerGroup withAssestGroup:model.assetGroup];
@@ -47,6 +50,8 @@ static NSString *sceneModelKey = @"sceneModelKey";
     }
     
     self.sceneModel = model;
+    self.bounds = self.sceneModel.compBounds;
+    self.viewportBounds = self.sceneModel.compBounds;
     
     NSNumber *fromStartFrame = self.sceneModel.startFrame;
     NSNumber *toEndFrame = self.sceneModel.endFrame;
@@ -63,40 +68,17 @@ static NSString *sceneModelKey = @"sceneModelKey";
     [self addAnimation:animation forKey:@"anim"];
     self.shouldRasterize = NO;
 }
-- (void)layoutSublayers {
-    [super layoutSublayers];
-    [self _layout];
-}
-- (void)_layout {
-    CATransform3D xform;
-    
-    CGFloat compAspect = self.sceneModel.compBounds.size.width / self.sceneModel.compBounds.size.height;
-    CGFloat viewAspect = self.superlayer.bounds.size.width / self.superlayer.bounds.size.height;
-    BOOL scaleWidth = compAspect > viewAspect;
-    CGFloat dominantDimension = scaleWidth ? self.superlayer.bounds.size.width : self.superlayer.bounds.size.height;
-    CGFloat compDimension = scaleWidth ? self.sceneModel.compBounds.size.width : self.sceneModel.compBounds.size.height;
-    CGFloat scale = dominantDimension / compDimension;
-    xform = CATransform3DMakeScale(scale, scale, 1);
-    
-    [CATransaction begin];
-    [CATransaction setDisableActions:YES];
-    self.bounds = self.sceneModel.compBounds;
-    self.transform = xform;
-    self.viewportBounds = self.sceneModel.compBounds;
-    [CATransaction commit];
-}
 @end
 
 @implementation CALayer (LOTAnimationLayer)
 + (nonnull instancetype)animationFromJSON:(nonnull NSDictionary *)animationJSON {
     return [self animationFromJSON:animationJSON inBundle:[NSBundle mainBundle] loop:NO];
 }
-+ (instancetype)animationFromJSON:(NSDictionary *)animationJSON loop:(BOOL)loop {
++ (nonnull instancetype)animationFromJSON:(NSDictionary *)animationJSON loop:(BOOL)loop {
     return [self animationFromJSON:animationJSON inBundle:[NSBundle mainBundle] loop:loop];
 }
 + (nonnull instancetype)animationFromJSON:(nullable NSDictionary *)animationJSON inBundle:(nullable NSBundle *)bundle loop:(BOOL)loop {
     LOTComposition *comp = [LOTComposition animationFromJSON:animationJSON inBundle:bundle];
     return [[LOTCompositionContainer alloc] initWithModel:comp inBundle:bundle loop:loop];
 }
-- (void)displayWithProgress:(CGFloat)progress { }
 @end
