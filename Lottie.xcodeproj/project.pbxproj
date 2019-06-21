@@ -615,6 +615,8 @@
 		486E89F4220B790E007CD915 /* KeyframeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E879E220B78BF007CD915 /* KeyframeExtensions.swift */; };
 		486E89F5220B790E007CD915 /* AnimationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E87A0220B78BF007CD915 /* AnimationContext.swift */; };
 		48F4EECD229F167F00949A97 /* TextCompositionLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486E8724220B78BF007CD915 /* TextCompositionLayer.swift */; };
+		E622878822BCC4BF00C0A315 /* AnimationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622878722BCC4BF00C0A315 /* AnimationLayer.swift */; };
+		E622878A22BCC72600C0A315 /* AnimationLayerPrivate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E622878922BCC72600C0A315 /* AnimationLayerPrivate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -764,6 +766,8 @@
 		486E879D220B78BF007CD915 /* Interpolatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolatable.swift; sourceTree = "<group>"; };
 		486E879E220B78BF007CD915 /* KeyframeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyframeExtensions.swift; sourceTree = "<group>"; };
 		486E87A0220B78BF007CD915 /* AnimationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationContext.swift; sourceTree = "<group>"; };
+		E622878722BCC4BF00C0A315 /* AnimationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLayer.swift; sourceTree = "<group>"; };
+		E622878922BCC72600C0A315 /* AnimationLayerPrivate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationLayerPrivate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -892,6 +896,7 @@
 				486E8702220B78BF007CD915 /* AnimationViewInitializers.swift */,
 				486E8703220B78BF007CD915 /* AnimationView.swift */,
 				486E8704220B78BF007CD915 /* AnimationPublic.swift */,
+				E622878722BCC4BF00C0A315 /* AnimationLayer.swift */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -976,6 +981,7 @@
 			children = (
 				486E8721220B78BF007CD915 /* CompLayers */,
 				486E872A220B78BF007CD915 /* AnimationContainer.swift */,
+				E622878922BCC72600C0A315 /* AnimationLayerPrivate.swift */,
 				486E872B220B78BF007CD915 /* Utility */,
 			);
 			path = LayerContainers;
@@ -1620,10 +1626,12 @@
 				486E8803220B78D1007CD915 /* Glyph.swift in Sources */,
 				486E8804220B78D1007CD915 /* TextAnimator.swift in Sources */,
 				486E8805220B78D1007CD915 /* Font.swift in Sources */,
+				E622878A22BCC72600C0A315 /* AnimationLayerPrivate.swift in Sources */,
 				486E8806220B78D1007CD915 /* ImageAsset.swift in Sources */,
 				486E8807220B78D1007CD915 /* PrecompAsset.swift in Sources */,
 				486E8808220B78D1007CD915 /* AssetLibrary.swift in Sources */,
 				486E8809220B78D1007CD915 /* Asset.swift in Sources */,
+				E622878822BCC4BF00C0A315 /* AnimationLayer.swift in Sources */,
 				486E880A220B78D1007CD915 /* LayerDebugging.swift in Sources */,
 				486E880B220B78D1007CD915 /* AnimatorNodeDebugging.swift in Sources */,
 				486E880C220B78D1007CD915 /* CGFloatExtensions.swift in Sources */,
