@@ -17,9 +17,16 @@ extension CALayer: AnimationLayer {
     public static func animation(withName name: String) -> CALayer {
         return AnimationContainer.layer(animation: Animation.named(name)!, imageProvider: nil)
     }
+    public static func animation(withName name: String, imageProvider: AnimationImageProvider) ->   CALayer {
+        return AnimationContainer.layer(animation: Animation.named(name)!, imageProvider: imageProvider)
+    }
     public static func animation(withPath path: String) -> CALayer {
         return AnimationContainer.layer(animation: Animation.filepath(path)!, imageProvider: nil)
     }
+    public static func animation(withPath path: String, imageProvider: AnimationImageProvider) -> CALayer {
+        return AnimationContainer.layer(animation: Animation.filepath(path)!, imageProvider: imageProvider)
+    }
+
     @objc public func compSize() -> CGSize {
         return .zero
     }
